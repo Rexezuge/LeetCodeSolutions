@@ -71,7 +71,7 @@ int main(void) {
     }
     --DIFF;
   }
-  std::cout << "] - " << std::setprecision(2) << PERCENT << "%" << std::endl
+  std::cout << "] - " << std::setprecision(3) << PERCENT << "%" << std::endl
             << std::flush;
   return EXIT_SUCCESS;
 }
