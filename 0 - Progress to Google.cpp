@@ -33,8 +33,8 @@ class Modifier {
 }  // namespace COLOR
 #endif  // BACKEND_INCLUDE_EASYCONTACT_COLORFULOUTPUT_HPP_
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 #include <vector>
 #define PRACTICE_NEEDED 60
 
@@ -42,12 +42,12 @@ int main(void) {
   std::cout << "Enter Your Progress: ";
   size_t Q;
   std::cin >> Q;
-  Q=Q/10;
+  Q = Q / 10;
   if (Q >= PRACTICE_NEEDED) {
     Q = PRACTICE_NEEDED;
   }
-  size_t DIFF=PRACTICE_NEEDED-Q;
-  double PERCENT=(double)Q/PRACTICE_NEEDED*100;
+  size_t DIFF = PRACTICE_NEEDED - Q;
+  double PERCENT = (double)Q / PRACTICE_NEEDED * 100;
   COLOR::Modifier DEFAULT(COLOR::FG_DEFAULT);
   std::vector<COLOR::Modifier> GOOGLE_COLOR{
       COLOR::Modifier(COLOR::FG_BLUE),  COLOR::Modifier(COLOR::FG_RED),
@@ -63,14 +63,15 @@ int main(void) {
     }
     --Q;
   }
-  std::cout<<DEFAULT;
-    while (DIFF > 0) {
+  std::cout << DEFAULT;
+  while (DIFF > 0) {
     std::cout << GOOGLE_NAME[i];
     if (++i >= GOOGLE_COLOR.size()) {
       i = 0;
     }
     --DIFF;
   }
-  std::cout<< "] - " << std::setprecision(2)<<PERCENT<<"%"<<std::endl << std::flush;
+  std::cout << "] - " << std::setprecision(2) << PERCENT << "%" << std::endl
+            << std::flush;
   return EXIT_SUCCESS;
 }
