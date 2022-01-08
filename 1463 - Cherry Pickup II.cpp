@@ -2,9 +2,9 @@
 using namespace std;
 
 class Solution {
-  size_t X_Max, Y_Max;
+  uint8_t X_Max, Y_Max;
   const vector<vector<int>>* grid;
-  int*** Memory;
+  int16_t*** Memory;
 
   bool InRange(int x, int y) const noexcept {
     return x >= 0 && x < this->X_Max && y >= 0 && y < this->Y_Max;
@@ -51,10 +51,11 @@ class Solution {
     this->X_Max = grid.size();
     this->Y_Max = grid[0].size();
     this->grid = &grid;
-    this->Memory = new int**[X_Max];
+    this->Memory = new int16_t**[X_Max];
     for (int i = 0; i < X_Max; ++i) {
-      this->Memory[i] = new int*[Y_Max];
-      for (int iR = 0; iR < Y_Max; ++iR) this->Memory[i][iR] = new int[Y_Max];
+      this->Memory[i] = new int16_t*[Y_Max];
+      for (int iR = 0; iR < Y_Max; ++iR)
+        this->Memory[i][iR] = new int16_t[Y_Max];
     }
     for (int i = 0; i < X_Max; ++i)
       for (int iR = 0; iR < Y_Max; ++iR)
