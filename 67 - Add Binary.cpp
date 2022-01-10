@@ -8,7 +8,7 @@ class Solution {
                    b_size = b.size();
     char Carry = '0';
     string Result;
-    Result.reserve(size);
+    Result.reserve(size + 1);
     for (int16_t i = 1; i <= size; ++i) {
       const char Left = i <= a_size ? a[a_size - i] : '0',
                  Right = i <= b_size ? b[b_size - i] : '0';
