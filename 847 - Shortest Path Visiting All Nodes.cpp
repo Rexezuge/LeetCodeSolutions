@@ -101,7 +101,7 @@ class Solution {
         currentQueue.pop();
       }
       ++stepCounter;
-      currentQueue = nextQueue;
+      currentQueue = move(nextQueue);
     }
 
     // On Error
