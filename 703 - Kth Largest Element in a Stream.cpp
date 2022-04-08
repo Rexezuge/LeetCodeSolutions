@@ -1,47 +1,29 @@
+#pragma GCC opptimize("fast")
 #include <bits/stdc++.h>
 using namespace std;
 
 class KthLargest {
-  int K;
-  priority_queue<int, vector<int>, greater<int>> Q;
+  const int m_MaxKthElements;
+  unique_ptr<priority_queue<int, vector<int>, function<bool(int, int)>>>
+      m_ElementsQueue;
 
  public:
-  KthLargest(int k, vector<int>& nums) {
-    K = k;
-    for (auto& i : nums) Q.push(move(i));
-    while (Q.size() > K) Q.pop();
-  }
+  explicit KthLargest(const int k, const vector<int>& nums) noexcept;
 
-  int add(int val) {
-    Q.push(val);
-    if (Q.size() > K) Q.pop();
-    return Q.top();
-  }
+  int add(const int val) noexcept;
 };
 
-#if 0  // Works, Using multiset
-class KthLargest {
-  int k;
-  multiset<int> nums;
+KthLargest::KthLargest(const int k, const vector<int>& nums) noexcept
+    : m_MaxKthElements(k),
+      m_ElementsQueue(
+          new priority_queue<int, vector<int>, function<bool(int, int)>>(
+              [](const int left, const int right) { return left > right; })) {
+  for (size_t i = 0; i < nums.size(); ++i) m_ElementsQueue->push(nums[i]);
+  while (m_ElementsQueue->size() > m_MaxKthElements) m_ElementsQueue->pop();
+}
 
- public:
-  KthLargest(int k, vector<int>& nums) {
-    this->k = k;
-    sort(nums.rbegin(), nums.rend());
-    for (int i = 0; i < min(k, static_cast<int>(nums.size())); ++i)
-      this->nums.insert(nums[i]);
-  }
-
-  int add(int val) {
-    nums.insert(val);
-    if (nums.size() > k) nums.erase(nums.begin());
-    return *nums.begin();
-  }
-};
-
-/**
- * Your KthLargest object will be instantiated and called as such:
- * KthLargest* obj = new KthLargest(k, nums);
- * int param_1 = obj->add(val);
- */
-#endif
+int KthLargest::add(const int val) noexcept {
+  m_ElementsQueue->push(val);
+  if (m_ElementsQueue->size() > m_MaxKthElements) m_ElementsQueue->pop();
+  return m_ElementsQueue->top();
+}
