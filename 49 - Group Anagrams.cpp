@@ -18,7 +18,7 @@ class Solution {
     }
 
     // Construct Return Vector
-    for (const auto& [k, v] : uMap) retVal.push_back(v);
+    for (auto&& [k, v] : uMap) retVal.push_back(v);
 
     // Runtime O(N*NlogN)
     // Space O(N)
