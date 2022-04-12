@@ -35,12 +35,20 @@ void Solution::gameOfLife(vector<vector<int>>& board) noexcept {
   // First Iteration, Marking Changes
   for (size_t r = 0; r < m; ++r) {
     for (size_t c = 0; c < n; ++c) {
-      int liveNeighbors = getLiveNeighbors(r, c);
+      const int liveNeighbors = getLiveNeighbors(r, c);
       if (board[r][c] == NOW_DEAD && liveNeighbors == 3)
+        // 4. Any dead cell with exactly three live neighbors becomes a live
+        // cell, as if by reproduction.
         board[r][c] = NEXT_LIVE;
       else if (board[r][c] == NOW_LIVE &&
                (liveNeighbors < 2 || liveNeighbors > 3))
+        // 1. Any live cell with fewer than two live neighbors dies as if caused
+        // by under-population.
+        // 3. Any live cell with more than three live neighbors dies, as if by
+        // over-population.
         board[r][c] = NEXT_DEAD;
+      // 2. Any live cell with two or three live neighbors lives on to the next
+      // generation.
     }
   }
 
